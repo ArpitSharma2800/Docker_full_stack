@@ -16,7 +16,7 @@ services:
       container_name: phpmyadmin
       restart: always
       ports:
-       - '3000:80'
+       - '3001:80'
       environment:
         PMA_HOST: db
    client:
@@ -31,3 +31,16 @@ services:
          - '8080:8080'
       stdin_open: true
       command: npm start
+   server:
+      container_name: node
+      restart: unless-stopped
+      build:
+         context: ./server
+         dockerfile: Dockerfile
+      volumes:
+         - './server:/app'
+         - '/app/node_modules'
+      ports:
+         - '3000:3000'
+      
+      

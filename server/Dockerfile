@@ -1,12 +1,15 @@
 FROM node:alpine
 
 RUN mkdir -p /app
+
+COPY package*.json ./app/
+
+COPY . /app/
+
 WORKDIR /app
-
-COPY package.json /app
-
-COPY . /app
 
 RUN npm install
 
-CMD ["npm", "start"]
+EXPOSE 3000
+
+CMD ["nodemon", "app.js"]

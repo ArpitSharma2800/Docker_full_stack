@@ -13,18 +13,12 @@ const pool = mysql.createPool({
 
 app.use(cors());
 
-app.listen(process.env.REACT_APP_SERVER_PORT, () => {
-  console.log(`App server now listening on port ${process.env.REACT_APP_SERVER_PORT}`);
-});
 
 app.get('/test', (req, res) => {
-  const { table } = req.query;
+  return res.end("done")
+});
 
-  pool.query(`select * from ${table}`, (err, results) => {
-    if (err) {
-      return res.send(err);
-    } else {
-      return res.send(results);
-    }
-  });
+const port = process.env.PORT || 3000;
+app.listen(port, function () {
+  console.log(`Example app listening on ${port}!`);
 });
